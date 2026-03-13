@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nova Motion</title>
+  <title>Tab Group Promo Card</title>
   <style>
     /* Nova design tokens (from design-tokens.md) */
     :root {
@@ -429,6 +429,7 @@
     .ntp-promo-actions { display: flex; gap: 8px; }
     .ntp-promo-btn-primary { background: #0060df; color: #fff; border: none; border-radius: 4px; padding: 8px 16px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; }
     .ntp-promo-btn-primary:hover { background: #0250bb; }
+    .ntp-promo-btn-primary:disabled { opacity: 0.3; cursor: default; }
     .ntp-promo-btn-secondary { background: #e6e6e6; color: #15141a; border: none; border-radius: 4px; padding: 8px 16px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; }
     .ntp-promo-btn-secondary:hover { background: #d9d9d9; }
     .ntp-promo-dismiss { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; border: none; background: rgba(0,0,0,0.06); border-radius: 8px; cursor: pointer; color: #15141a; display: flex; align-items: center; justify-content: center; font-size: 16px; line-height: 1; }
@@ -540,6 +541,7 @@
     .tab-group-stroke {
       background: var(--theme-color-default, #854dff);
       height: 2px; border-radius: 2px; width: 100%; flex-shrink: 0;
+      margin-top: 1px;
       opacity: 0;
       animation: tab-group-stroke-in 0.18s cubic-bezier(0.25, 0.1, 0.25, 1) 0.03s forwards;
     }
@@ -2791,6 +2793,7 @@
       if (cancelBtn) cancelBtn.addEventListener('click', hideTabGroupUI);
       if (doneBtn) doneBtn.addEventListener('click', function() {
         if (panel) panel.classList.remove('is-visible');
+        if (showBtn) showBtn.disabled = true;
       });
       if (colorSwatches) {
         colorSwatches.querySelectorAll('.tab-group-panel-swatch').forEach(function(sw) {
