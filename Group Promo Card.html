@@ -521,7 +521,9 @@
     .tabs-container-grouped.is-visible { display: flex; overflow: visible; }
     .tabs-container-default.is-hidden { display: none; }
     .tab-group { display: flex; flex-direction: column; align-items: stretch; flex-shrink: 0; position: relative; overflow: visible; }
-    .tab-group-content { display: flex; gap: 4px; align-items: center; }
+    .tab-group-content { display: flex; gap: 4px; align-items: flex-end; }
+    .tab-group-label-and-first { display: flex; flex-direction: column; align-items: stretch; flex-shrink: 0; }
+    .tab-group-underlined-row { display: flex; gap: 4px; align-items: center; }
     .tab-group-label {
       display: flex; align-items: center; justify-content: center;
       width: 32px; height: 32px; flex-shrink: 0;
@@ -683,6 +685,80 @@
       z-index: 2;
     }
     .onboarding-callout-dismiss:hover { opacity: 0.8; }
+    /* Tab context menu - Opt 3 (Figma: Tab Groups – Context Menu MacOS) */
+    .tab-context-menu {
+      position: fixed;
+      z-index: 1002;
+      min-width: 200px;
+      padding: 5px 6px;
+      background: rgba(253, 250, 244, 0.8);
+      -webkit-backdrop-filter: blur(30px);
+      backdrop-filter: blur(30px);
+      border: 0.5px solid #b4b4b6;
+      border-radius: 6px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.15s ease, visibility 0.15s;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Segoe UI', system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .tab-context-menu.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .tab-context-menu-item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 22px;
+      padding: 0 8px;
+      border: none;
+      background: transparent;
+      text-align: left;
+      font-size: 13px;
+      color: #15141a;
+      opacity: 0.9;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .tab-context-menu-item:hover {
+      background: rgba(123, 97, 143, 0.15);
+    }
+    .tab-context-menu-item-primary {
+      background: #68a2f9;
+      color: #fff;
+      opacity: 1;
+    }
+    .tab-context-menu-item-primary:hover {
+      background: #5b91e8;
+    }
+    .tab-context-menu-item-sub {
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .tab-context-chevron {
+      flex-shrink: 0;
+      width: 5px;
+      height: 9px;
+      color: #15141a;
+      opacity: 0.9;
+    }
+    .tab-context-menu-item-primary .tab-context-chevron {
+      color: #fff;
+    }
+    .tab-context-menu-divider {
+      height: 1px;
+      background: #cfcfd8;
+      margin: 5px 4px;
+      flex-shrink: 0;
+    }
     .tab-preview {
       position: fixed;
       z-index: 10000;
@@ -1209,7 +1285,7 @@
       </div>
     </div>
   </div>
-  <h1>Nova Motion – Chrome & Sidebar Explorations</h1>
+  <h1>New Tab – Tab Groups Promo Card</h1>
   <div class="ui-wrapper">
   <h2 class="opt-header">Opt 1 – Tab Group Panel</h2>
   <div class="toolbar-row row-v1">
@@ -1233,13 +1309,15 @@
               <div class="tab booking"><img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=booking.com&sz=32" width="16" height="16" alt=""><span class="tab-title">booking.com</span></div>
               <div class="tab-group">
                 <div class="tab-group-content">
-                  <div class="tab-group-label" id="tab-group-label"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M0 11C0 4.92487 4.92487 0 11 0C17.0751 0 22 4.92487 22 11C22 17.0751 17.0751 22 11 22H4.4C4.02856 22 3.84284 22 3.68616 21.9877C1.72466 21.8333 0.166705 20.2753 0.0123307 18.3138C0 18.1572 0 17.9714 0 17.6V11Z" fill="#854dff"/></svg></div>
-                  <div class="tab-group-tabs">
-                    <div class="tab active firefox"><img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=firefox.com&sz=32" width="16" height="16" alt=""><span class="tab-title">New tab</span><div class="tab-close">×</div></div>
-                    <div class="tab gmail"><img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=32" width="16" height="16" alt=""><span class="tab-title">gmail.com</span></div>
+                  <div class="tab-group-label-and-first">
+                    <div class="tab-group-underlined-row">
+                      <div class="tab-group-label" id="tab-group-label"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M0 11C0 4.92487 4.92487 0 11 0C17.0751 0 22 4.92487 22 11C22 17.0751 17.0751 22 11 22H4.4C4.02856 22 3.84284 22 3.68616 21.9877C1.72466 21.8333 0.166705 20.2753 0.0123307 18.3138C0 18.1572 0 17.9714 0 17.6V11Z" fill="#854dff"/></svg></div>
+                      <div class="tab active firefox"><img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=firefox.com&sz=32" width="16" height="16" alt=""><span class="tab-title">New tab</span><div class="tab-close">×</div></div>
+                    </div>
+                    <div class="tab-group-stroke"></div>
                   </div>
+                  <div class="tab gmail"><img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=32" width="16" height="16" alt=""><span class="tab-title">gmail.com</span></div>
                 </div>
-                <div class="tab-group-stroke"></div>
                 <div class="tab-group-panel" id="tab-group-panel">
                   <div class="tab-group-panel-title">Create tab group</div>
                   <div class="tab-group-panel-colors" id="tab-group-colors">
@@ -1479,7 +1557,7 @@
                   <h2 class="ntp-promo-title">Ready to clean up your tabs?</h2>
                   <p class="ntp-promo-excerpt">Organize your tabs by dragging one tab on top of another to create your first group.</p>
                   <div class="ntp-promo-actions">
-                    <button type="button" class="ntp-promo-btn-primary" id="ntp-promo-show">Show me how</button>
+                    <button type="button" class="ntp-promo-btn-primary" id="ntp-promo-show">Create a tab group</button>
                     <button type="button" class="ntp-promo-btn-secondary" id="ntp-promo-later">Maybe later</button>
                   </div>
                 </div>
@@ -1785,6 +1863,336 @@
                   <div class="ntp-promo-actions">
                     <button type="button" class="ntp-promo-btn-primary" id="ntp-promo-show-2">Show me how</button>
                     <button type="button" class="ntp-promo-btn-secondary" id="ntp-promo-later-2">Maybe later</button>
+                  </div>
+                </div>
+              </div>
+              <section class="ntp-feed">
+                <div class="ntp-feed-header">
+                  <h3 class="ntp-feed-title">Popular today</h3>
+                  <div class="ntp-feed-actions">
+                    <button type="button" class="ntp-feed-btn">Follow</button>
+                    <button type="button" class="ntp-feed-menu" aria-label="Menu">&#8942;</button>
+                  </div>
+                </div>
+                <div class="ntp-feed-cards">
+                  <div class="ntp-feed-card-large">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=80" alt="" />
+                    <div class="ntp-feed-card-large-content">
+                      <div class="ntp-feed-card-title">I'm a travel editor – here's what I thought of the world's best hotel</div>
+                      <p class="ntp-feed-card-excerpt">Every year, 600 industry experts – travel journos, hoteliers and seasoned luxury travellers – put their heads together to come up with a definitive ranking of the most outstanding places to stay on the planet. And last year, the World's 50 Best Hotels – an offshoot of the much-respected World's 50 Best Restaurants – awarded Capella Bangkok the coveted title of the best hotel in the world.</p>
+                      <div class="ntp-feed-card-publisher">
+                        <span class="ntp-feed-card-publisher-icon"></span>
+                        <span>TimeOut</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ntp-feed-card-small">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=220&q=80" alt="" />
+                    <div class="ntp-feed-card-small-content">
+                      <div class="ntp-feed-card-title">The best protein pantry staples of 2025: SELF Pantry Award Winners</div>
+                      <div class="ntp-feed-card-publisher">
+                        <span class="ntp-feed-card-publisher-icon"></span>
+                        <span>SELF</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ntp-feed-card-small">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=220&q=80" alt="" />
+                    <div class="ntp-feed-card-small-content">
+                      <div class="ntp-feed-card-title">Hideo Kojima says he wants to make weirder games, but he can't</div>
+                      <div class="ntp-feed-card-publisher">
+                        <span class="ntp-feed-card-publisher-icon"></span>
+                        <span>Polygon</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ntp-feed-card-tall">
+                    <img src="https://images.unsplash.com/photo-1633265486064-086b219458ec?w=300&q=80" alt="" />
+                    <div class="ntp-feed-card-tall-content">
+                      <div class="ntp-feed-card-title">Encryption protects us – and it should stay that way</div>
+                      <div class="ntp-feed-card-publisher">
+                        <span>Sponsored by Mozilla Foundation</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 class="opt-header">Opt 3 – Context Menu</h2>
+  <div class="toolbar-row row-v1">
+    <style>.row-v1 .browser-frame, .row-v1 .chrome-top { overflow: visible; }</style>
+    <div class="browser-frame">
+      <div class="chrome-top">
+        <div class="tab-strip">
+          <div class="traffic-lights" aria-hidden="true"><img src="Icons/mac_buttons.svg" width="52" height="12" alt=""></div>
+          <div class="tab-strip-left">
+            <div class="pinned-tabs">
+              <div class="pinned-tab"><img class="pinned-tab-favicon" src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=32" width="16" height="16" alt=""></div>
+              <div class="pinned-tab"><img class="pinned-tab-favicon" src="https://www.google.com/s2/favicons?domain=youtube.com&sz=32" width="16" height="16" alt=""></div>
+            </div>
+            <div class="tabs-container tabs-container-default" id="tabs-default-3">
+              <div class="tab booking"><img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=booking.com&sz=32" width="16" height="16" alt=""><span class="tab-title">booking.com</span></div>
+              <div class="tab active firefox" id="tab-newtab-3"><img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=firefox.com&sz=32" width="16" height="16" alt=""><span class="tab-title">New tab</span><div class="tab-close">×</div></div>
+              <div class="tab gmail"><img class="tab-favicon" src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=32" width="16" height="16" alt=""><span class="tab-title">gmail.com</span></div>
+              <div class="add-tab"><img src="Icons/newtab.svg" width="32" height="32" alt="New tab"></div>
+            </div>
+          </div>
+          <div class="tab-strip-right">
+            <button type="button" class="win-chevron" aria-label="List All tabs"><img src="Icons/List All tabs.svg" width="32" height="32" alt="" style="display:block"></button>
+            <button type="button" class="firefox-logo-btn" aria-label="Firefox"><img src="Icons/Firefox logo no outline.svg" width="32" height="32" alt=""></button>
+            <button type="button" class="app-menu-btn" aria-label="Menu"><img src="Icons/App menu.svg" width="32" height="32" alt="" style="display:block"></button>
+          </div>
+          <div class="tab-context-menu tab-context-menu-mac" id="tab-context-menu-3" aria-hidden="true">
+            <div class="tab-context-menu-item">New Tab</div>
+            <div class="tab-context-menu-item tab-context-menu-item-primary" id="tab-context-add-group-3">Add Tab to New Group</div>
+            <div class="tab-context-menu-item">Remove from Group</div>
+            <div class="tab-context-menu-divider"></div>
+            <div class="tab-context-menu-item tab-context-menu-item-sub">
+              <span>Reload Tab</span>
+              <svg class="tab-context-chevron" width="5" height="9" viewBox="0 0 5 9" fill="currentColor"><path d="M1 0l3 4.5L1 9V0z"/></svg>
+            </div>
+            <div class="tab-context-menu-item">Mute Tab</div>
+            <div class="tab-context-menu-item">Pin Tab</div>
+            <div class="tab-context-menu-item">Duplicate Tab</div>
+            <div class="tab-context-menu-divider"></div>
+            <div class="tab-context-menu-item">Bookmark Tab...</div>
+            <div class="tab-context-menu-item tab-context-menu-item-sub">
+              <span>Move Tab</span>
+              <svg class="tab-context-chevron" width="5" height="9" viewBox="0 0 5 9" fill="currentColor"><path d="M1 0l3 4.5L1 9V0z"/></svg>
+            </div>
+            <div class="tab-context-menu-item tab-context-menu-item-sub">
+              <span>Send Tab to Device</span>
+              <svg class="tab-context-chevron" width="5" height="9" viewBox="0 0 5 9" fill="currentColor"><path d="M1 0l3 4.5L1 9V0z"/></svg>
+            </div>
+            <div class="tab-context-menu-item tab-context-menu-item-sub">
+              <span>Share</span>
+              <svg class="tab-context-chevron" width="5" height="9" viewBox="0 0 5 9" fill="currentColor"><path d="M1 0l3 4.5L1 9V0z"/></svg>
+            </div>
+            <div class="tab-context-menu-item">Select All Tabs</div>
+            <div class="tab-context-menu-divider"></div>
+            <div class="tab-context-menu-item">Close Tab</div>
+            <div class="tab-context-menu-item">Close Duplicate Tabs</div>
+            <div class="tab-context-menu-item tab-context-menu-item-sub">
+              <span>Close Multiple Tabs</span>
+              <svg class="tab-context-chevron" width="5" height="9" viewBox="0 0 5 9" fill="currentColor"><path d="M1 0l3 4.5L1 9V0z"/></svg>
+            </div>
+            <div class="tab-context-menu-item">Reopen Closed Tab</div>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <button class="toolbar-btn" title="Sidebar"><img src="Icons/Sidebar opener.svg" width="32" height="32" alt=""></button>
+            <button class="toolbar-btn" title="Back"><img src="Icons/Back.svg" width="32" height="32" alt=""></button>
+            <button class="toolbar-btn" title="Forward"><img src="Icons/Forward.svg" width="32" height="32" alt=""></button>
+            <button class="toolbar-btn" title="Refresh"><img src="Icons/Refresh.svg" width="32" height="32" alt=""></button>
+          </div>
+          <div class="address-bar-wrap">
+            <div class="address-bar-dropdown" tabindex="0" role="button" aria-expanded="false" aria-haspopup="true">
+              <div class="address-bar">
+              <div class="address-bar-security"><button class="toolbar-btn" title="Protection" type="button"><img src="Icons/Privacy and security.svg" width="24" height="24" alt=""></button></div>
+              <span class="address-bar-url">firefox.com</span>
+              <div class="site-actions">
+                <div class="bookmark-dropdown-wrap">
+                <div class="bookmark-btn" id="v1-bookmark-btn-3">
+                  <span class="bookmark-btn-hover" aria-hidden="true"></span>
+                  <svg class="star-wrapper" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <defs>
+                      <linearGradient id="v1-star-gradient-3" x1="100%" y1="100%" x2="0%" y2="0%" gradientUnits="objectBoundingBox">
+                        <stop offset="0%" stop-color="#854DFF"/>
+                        <stop offset="12%" stop-color="#854DFF"/>
+                        <stop offset="28%" stop-color="#F37E49"/>
+                        <stop offset="50%" stop-color="#FC4F43"/>
+                        <stop offset="100%" stop-color="#FDE650"/>
+                      </linearGradient>
+                    </defs>
+                    <path class="star-outline" d="M14.3741 9.6026C14.959 8.1325 17.0413 8.13243 17.626 9.6026L18.8507 12.6807L22.1573 12.8956L22.3018 12.9102C23.7741 13.1193 24.3417 15.0083 23.1612 15.9874L20.6124 18.1036L21.4307 21.3145V21.3155C21.8205 22.8481 20.1374 24.0713 18.7999 23.2256L15.9991 21.4561L13.1993 23.2256C11.863 24.0703 10.1771 22.8493 10.5694 21.3145L11.3868 18.1036L8.83796 15.9883C7.61973 14.9767 8.26422 12.9978 9.84187 12.8946H9.84284L13.1475 12.6807L14.3741 9.6026ZM16.2315 10.1573C16.1587 9.97426 15.9227 9.95103 15.8087 10.088L15.7676 10.1573L14.3663 13.6768C14.2591 13.9456 14.0067 14.1289 13.7178 14.1475L9.93952 14.3917C9.71351 14.4067 9.6224 14.6898 9.79597 14.834L12.71 17.253C12.9328 17.4379 13.0296 17.7351 12.9581 18.0157L12.0225 21.6856C11.967 21.9027 12.2069 22.0792 12.3985 21.9581L15.5997 19.9346L15.6934 19.8839C15.9204 19.7823 16.1863 19.7994 16.4005 19.9346L19.6016 21.9581L19.6749 21.9903C19.8475 22.0344 20.0251 21.8772 19.9766 21.6856L19.0421 18.0157C18.9706 17.7351 19.0673 17.4379 19.2901 17.253L22.2042 14.834L22.2569 14.7745C22.3389 14.6455 22.281 14.4668 22.1387 14.4102L22.0606 14.3926L18.2813 14.1475C17.9925 14.1288 17.74 13.9456 17.6329 13.6768L16.2325 10.1573H16.2315Z"/>
+                    <path class="star-fill" d="M14.3741 9.6026C14.959 8.1325 17.0413 8.13243 17.626 9.6026L18.8507 12.6807L22.1573 12.8956L22.3018 12.9102C23.7741 13.1193 24.3417 15.0083 23.1612 15.9874L20.6124 18.1036L21.4307 21.3145V21.3155C21.8205 22.8481 20.1374 24.0713 18.7999 23.2256L15.9991 21.4561L13.1993 23.2256C11.863 24.0703 10.1771 22.8493 10.5694 21.3145L11.3868 18.1036L8.83796 15.9883C7.61973 14.9767 8.26422 12.9978 9.84187 12.8946H9.84284L13.1475 12.6807L14.3741 9.6026Z"/>
+                  </svg>
+                </div>
+                <div class="bookmark-panel" id="v1-bookmark-panel-3" aria-hidden="true">
+                  <div class="bookmark-panel-header">Add bookmark</div>
+                  <div class="bookmark-panel-divider"></div>
+                  <div class="bookmark-panel-body">
+                    <div class="bookmark-panel-field">
+                      <label class="bookmark-panel-label">Name</label>
+                      <input type="text" class="bookmark-panel-input" placeholder="Example Domain" value="Example Domain">
+                    </div>
+                    <div class="bookmark-panel-row">
+                      <div class="bookmark-panel-field">
+                        <label class="bookmark-panel-label">Location</label>
+                        <button type="button" class="bookmark-panel-select">
+                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2.5l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5-2.5-2.5 3.5-.5L8 2.5z"/></svg>
+                          Bookmarks Toolbar
+                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><path d="M4 6l4 4 4-4"/></svg>
+                        </button>
+                      </div>
+                      <button type="button" class="bookmark-panel-icon-btn" aria-label="Open folder"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></button>
+                    </div>
+                    <div class="bookmark-panel-row">
+                      <div class="bookmark-panel-field">
+                        <label class="bookmark-panel-label">Tags</label>
+                        <input type="text" class="bookmark-panel-input" placeholder="Separate tags with commas">
+                      </div>
+                      <button type="button" class="bookmark-panel-icon-btn" aria-label="Add tag"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6l4 4 4-4"/></svg></button>
+                    </div>
+                    <div class="bookmark-panel-checkbox">
+                      <input type="checkbox" id="v1-show-editor-3" checked>
+                      <label for="v1-show-editor-3">Show editor when saving</label>
+                    </div>
+                    <div class="bookmark-panel-actions">
+                      <button type="button" class="bookmark-panel-btn bookmark-panel-btn-cancel">Cancel</button>
+                      <button type="button" class="bookmark-panel-btn bookmark-panel-btn-save">Save</button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+              <div class="address-bar-dropdown-divider"></div>
+              <div class="address-bar-dropdown-list">
+                <div class="address-bar-dropdown-item">
+                  <div class="address-bar-dropdown-item-icon"><img src="https://www.google.com/s2/favicons?domain=mozilla.org&sz=32" width="16" height="16" alt=""></div>
+                  <span class="address-bar-dropdown-item-label">How to download Firefox</span>
+                </div>
+                <div class="address-bar-dropdown-item-header">Header</div>
+                <div class="address-bar-dropdown-item">
+                  <div class="address-bar-dropdown-item-icon"><img src="https://www.google.com/s2/favicons?domain=mozilla.org&sz=32" width="16" height="16" alt=""></div>
+                  <span class="address-bar-dropdown-item-label">How to download Firefox</span>
+                </div>
+                <div class="address-bar-dropdown-item-header">Header</div>
+                <div class="address-bar-dropdown-item">
+                  <div class="address-bar-dropdown-item-icon"><img src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=32" width="16" height="16" alt=""></div>
+                  <span class="address-bar-dropdown-item-label">Inbox • Google Mail</span>
+                  <span class="address-bar-dropdown-item-url">mail.google.com</span>
+                </div>
+                <div class="address-bar-dropdown-item">
+                  <div class="address-bar-dropdown-item-icon"><img src="https://www.google.com/s2/favicons?domain=mail.google.com&sz=32" width="16" height="16" alt=""></div>
+                  <span class="address-bar-dropdown-item-label">Inbox • Google Mail</span>
+                  <span class="address-bar-dropdown-item-url">mail.google.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="toolbar-right">
+            <button class="vpn-btn"><img src="Icons/VPN.svg" width="52.3" height="32" alt="VPN"></button>
+            <button class="toolbar-btn" title="Account"><img src="Icons/Account.svg" width="32" height="32" alt="" class="icon-16"></button>
+            <button class="toolbar-btn" title="Extensions"><img src="Icons/Extensions.svg" width="32" height="32" alt="" class="icon-16"></button>
+          </div>
+        </div>
+      </div>
+      <div class="main-area">
+        <div class="sidebar-wrapper">
+        <div class="chrome-sidebar" id="v1-chrome-sidebar-3">
+          <nav class="sidebar" aria-label="Sidebar">
+            <div class="sidebar-tools">
+              <button type="button" class="sidebar-btn" title="All tabs" aria-label="All tabs"><img src="Icons/All tabs.svg" width="32" height="32" alt=""></button>
+              <button type="button" class="sidebar-btn" title="Bookmarks" aria-label="Bookmarks"><img src="Icons/Bookmark.svg" width="32" height="32" alt=""></button>
+              <button type="button" class="sidebar-btn" data-panel="history" title="History" aria-label="History"><img src="Icons/History.svg" width="32" height="32" alt=""></button>
+              <button type="button" class="sidebar-btn" title="Synced tabs" aria-label="Synced tabs"><img src="Icons/sync.svg" width="32" height="32" alt=""></button>
+            </div>
+            <div class="sidebar-settings">
+              <button type="button" class="sidebar-btn" title="Settings" aria-label="Settings"><img src="Icons/Settings.svg" width="32" height="32" alt=""></button>
+            </div>
+          </nav>
+          <div class="history-panel" role="region" aria-label="History">
+            <div class="history-panel-inner">
+              <div class="history-panel-header">
+                <span class="history-panel-title">History</span>
+                <div class="history-panel-actions">
+                  <button type="button" class="history-panel-btn history-panel-close" aria-label="Close">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.146 3.854a.5.5 0 0 1 0 .708L8.708 8l3.438 3.438a.5.5 0 1 1-.708.708L8 8.708l-3.438 3.438a.5.5 0 0 1-.708-.708L7.292 8 3.854 4.562a.5.5 0 0 1 .708-.708L8 7.292l3.438-3.438a.5.5 0 0 1 .708 0z"/></svg>
+                  </button>
+                  <button type="button" class="history-panel-btn" aria-label="More options">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg>
+                  </button>
+                </div>
+              </div>
+              <input type="search" class="history-panel-search" placeholder="Search history" aria-label="Search history">
+              <div class="history-panel-list">
+                <div class="history-section-header">Today</div>
+                <a href="#" class="history-item">
+                  <img class="history-item-favicon" src="https://www.google.com/s2/favicons?domain=booking.com&sz=32" width="16" height="16" alt="">
+                  <div class="history-item-content">
+                    <div class="history-item-title">Booking.com</div>
+                    <div class="history-item-url">booking.com</div>
+                  </div>
+                </a>
+                <a href="#" class="history-item">
+                  <img class="history-item-favicon" src="https://www.google.com/s2/favicons?domain=expedia.com&sz=32" width="16" height="16" alt="">
+                  <div class="history-item-content">
+                    <div class="history-item-title">£56 Cheap Flights from Barcelona (BCN)</div>
+                    <div class="history-item-url">expedia.com</div>
+                  </div>
+                </a>
+                <div class="history-section-header">Yesterday</div>
+                <a href="#" class="history-item">
+                  <img class="history-item-favicon" src="https://www.google.com/s2/favicons?domain=airbnb.com&sz=32" width="16" height="16" alt="">
+                  <div class="history-item-content">
+                    <div class="history-item-title">Vacation Rentals, Cabins, Beach Houses</div>
+                    <div class="history-item-url">airbnb.com</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="content-area">
+          <div class="ntp-wrapper">
+            <div class="ntp-slot">
+              <header class="ntp-header-row">
+                <div class="ntp-logo-container">
+                  <div class="ntp-logo" style="display:flex;align-items:center;gap:12px;">
+                    <img src="Icons/Firefox logo no outline.svg" alt="" style="height:40px;width:auto;" />
+                    <span style="font-size:22px;font-weight:600;color:#15141a;">Firefox</span>
+                  </div>
+                </div>
+                <div class="ntp-search-container">
+                  <div class="ntp-search">
+                    <div class="ntp-search-bar">
+                      <img src="https://www.google.com/s2/favicons?domain=google.com&sz=32" alt="" />
+                      <span>Search with Google or enter address</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="ntp-weather-container">
+                  <div class="ntp-weather">
+                    <span class="ntp-weather-icon" style="font-size:24px">&#9729;&#65039;</span>
+                    <div>
+                      <div class="ntp-weather-temp">28°F</div>
+                      <div class="ntp-weather-location">New York</div>
+                    </div>
+                    <button type="button" class="ntp-menu-btn" aria-label="Menu">&#8942;</button>
+                  </div>
+                </div>
+              </header>
+              <div class="ntp-shortcuts">
+                <div class="ntp-shortcut"><div class="ntp-shortcut-tile"><img src="https://www.google.com/s2/favicons?domain=amazon.com&sz=40" alt="" /></div><span class="ntp-shortcut-label">Amazon</span><span class="ntp-shortcut-spon">Sponsored</span></div>
+                <div class="ntp-shortcut"><div class="ntp-shortcut-tile"><img src="https://www.google.com/s2/favicons?domain=airbnb.com&sz=40" alt="" /></div><span class="ntp-shortcut-label">Airbnb</span><span class="ntp-shortcut-spon">Sponsored</span></div>
+                <div class="ntp-shortcut"><div class="ntp-shortcut-tile"><img src="https://www.google.com/s2/favicons?domain=hotels.com&sz=40" alt="" /></div><span class="ntp-shortcut-label">Hotels.com</span><span class="ntp-shortcut-spon">Sponsored</span></div>
+                <div class="ntp-shortcut"><div class="ntp-shortcut-tile"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=40" alt="" /></div><span class="ntp-shortcut-label">Youtube</span></div>
+                <div class="ntp-shortcut"><div class="ntp-shortcut-tile"><img src="https://www.google.com/s2/favicons?domain=facebook.com&sz=40" alt="" /></div><span class="ntp-shortcut-label">Facebook</span></div>
+                <div class="ntp-shortcut"><div class="ntp-shortcut-tile"><img src="https://www.google.com/s2/favicons?domain=reddit.com&sz=40" alt="" /></div><span class="ntp-shortcut-label">Reddit</span></div>
+                <div class="ntp-shortcut"><div class="ntp-shortcut-tile"><img src="https://www.google.com/s2/favicons?domain=wikipedia.org&sz=40" alt="" /></div><span class="ntp-shortcut-label">Wikipedia</span></div>
+                <div class="ntp-shortcut"><div class="ntp-shortcut-tile" style="font-size:24px;color:#5b5b66">+</div><span class="ntp-shortcut-label">Add shortcut</span></div>
+              </div>
+              <div class="ntp-promo-card" id="ntp-promo-card-3">
+                <button type="button" class="ntp-promo-dismiss" aria-label="Dismiss" id="ntp-promo-dismiss-3">×</button>
+                <div class="ntp-promo-illustration">
+                  <img src="assets/background.svg" alt="" class="ntp-promo-illustration-bg" />
+                  <img src="assets/Mask group.svg" alt="" class="ntp-promo-illustration-fox" />
+                </div>
+                <div class="ntp-promo-content">
+                  <h2 class="ntp-promo-title">Ready to clean up your tabs?</h2>
+                  <p class="ntp-promo-excerpt">Organize your tabs by dragging one tab on top of another to create your first group.</p>
+                  <div class="ntp-promo-actions">
+                    <button type="button" class="ntp-promo-btn-primary" id="ntp-promo-show-3">Show me how</button>
+                    <button type="button" class="ntp-promo-btn-secondary" id="ntp-promo-later-3">Maybe later</button>
                   </div>
                 </div>
               </div>
@@ -2845,6 +3253,61 @@
       if (showBtn) showBtn.addEventListener('click', showCallout);
       if (laterBtn) laterBtn.addEventListener('click', dismissCard);
       if (calloutDismiss) calloutDismiss.addEventListener('click', hideCallout);
+      document.addEventListener('click', function(e) {
+        if (!callout || !callout.classList.contains('is-visible')) return;
+        if (callout.contains(e.target)) return;
+        if (showBtn && showBtn.contains(e.target)) return;
+        hideCallout();
+      });
+    })();
+
+    (function initContextMenuPromo() {
+      var card = document.getElementById('ntp-promo-card-3');
+      var dismissBtn = document.getElementById('ntp-promo-dismiss-3');
+      var showBtn = document.getElementById('ntp-promo-show-3');
+      var laterBtn = document.getElementById('ntp-promo-later-3');
+      var anchorTab = document.getElementById('tab-newtab-3');
+      var contextMenu = document.getElementById('tab-context-menu-3');
+      var contextAddGroup = document.getElementById('tab-context-add-group-3');
+      if (!card) return;
+      function dismissCard() { card.classList.add('is-dismissed'); }
+      function showContextMenuAt(x, y) {
+        if (!contextMenu) return;
+        contextMenu.style.left = x + 'px';
+        contextMenu.style.top = y + 'px';
+        contextMenu.classList.add('is-visible');
+        contextMenu.setAttribute('aria-hidden', 'false');
+      }
+      function hideContextMenu() {
+        if (contextMenu) {
+          contextMenu.classList.remove('is-visible');
+          contextMenu.setAttribute('aria-hidden', 'true');
+        }
+      }
+      if (anchorTab) {
+        anchorTab.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          showContextMenuAt(e.clientX, e.clientY);
+        });
+      }
+      if (showBtn) {
+        showBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (!anchorTab) return;
+          var rect = anchorTab.getBoundingClientRect();
+          showContextMenuAt(rect.left, rect.bottom + 4);
+        });
+      }
+      if (contextMenu) contextMenu.addEventListener('click', function(e) {
+        if (e.target.closest('.tab-context-menu-item')) hideContextMenu();
+      });
+      document.addEventListener('click', function(e) {
+        if (contextMenu && contextMenu.classList.contains('is-visible') && !contextMenu.contains(e.target) && (!anchorTab || !anchorTab.contains(e.target))) {
+          hideContextMenu();
+        }
+      });
+      if (dismissBtn) dismissBtn.addEventListener('click', dismissCard);
+      if (laterBtn) laterBtn.addEventListener('click', dismissCard);
     })();
 
     (function initTabPreview() {
